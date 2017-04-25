@@ -12,7 +12,8 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=0,max_digits=6)
     available = models.BooleanField(default=True)
     quantity = models.IntegerField(default=0)
-    brand = models.CharField(choices=brands, default='whisky', max_length=100)
+    type = models.CharField(choices=brands, default='whisky', max_length=100)
+    category = models.CharField(default='drinks')
 
     class Meta:
         ordering = ('created',)

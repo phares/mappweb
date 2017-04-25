@@ -34,4 +34,4 @@ class DrinkSerializer(serializers.Serializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id','name','price','available','quantity','brand')
+        fields = ('id','name','price','available','quantity','type','category')
