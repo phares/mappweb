@@ -16,6 +16,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('drinks.urls')),
+    url(r'^', include('products.urls')),
+    url(r'^orders/', include('orders.urls')),
+    url(r'^', include('address.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from drinks.models import Drink, brands
+from products.models import Product, brands
 
 # Normal class serializer
 '''
@@ -31,7 +31,7 @@ class DrinkSerializer(serializers.Serializer):
 '''
 
 # ModelSerializer class
-class DrinkSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Drink
+        model = Product
         fields = ('id','name','price','available','quantity','brand')

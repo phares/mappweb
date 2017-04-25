@@ -6,13 +6,13 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from drinks.models import Drink
+from products.models import Product
 from django.http import Http404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from drinks.serializers import DrinkSerializer
+from products.serializers import ProductSerializer
 from rest_framework import mixins
 from rest_framework import generics
 
@@ -21,11 +21,11 @@ from rest_framework import generics
 @api_view(['GET', 'POST'])
 def drink_list(request, format=None):
     """
-    List all drinks, or create a new snippet.
+    List all products, or create a new snippet.
     """
     if request.method == 'GET':
-        drinks = Drink.objects.all()
-        serializer = DrinkSerializer(drinks, many=True)
+        products = Drink.objects.all()
+        serializer = DrinkSerializer(products, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -64,7 +64,7 @@ def drink_detail(request, pk, format=None):
 '''
 class DrinkList(APIView):
     """
-    List all drinks, or create a new drink.
+    List all products, or create a new drink.
     """
     def get(self, request, format=None):
         snippets = Drink.objects.all()
@@ -136,11 +136,11 @@ class DrinkDetail(mixins.RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 '''
 
-class DrinkList(generics.ListCreateAPIView):
-    queryset = Drink.objects.all()
-    serializer_class = DrinkSerializer
+class ProductList(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
-class DrinkDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Drink.objects.all()
-    serializer_class = DrinkSerializer
+class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

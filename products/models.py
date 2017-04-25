@@ -6,7 +6,7 @@ from django.db import models
 brands = (('WHISKY','whisky'),('BEER','beer'))
 
 # Create your models here.
-class Drink(models.Model):
+class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=20, blank=False,default='')
     price = models.DecimalField(decimal_places=0,max_digits=6)
