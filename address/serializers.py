@@ -34,4 +34,4 @@ class DrinkSerializer(serializers.Serializer):
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = ('id','place','road','contact','house_no','owner','order')
+        fields = ('id','place','road','contact','house_no','owner')

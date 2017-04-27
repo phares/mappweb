@@ -11,8 +11,10 @@ class Address(models.Model):
     road = models.CharField(max_length=100, blank=True,default='')
     contact = models.CharField(max_length=15, blank=True,default='')
     house_no = models.CharField(max_length=100,default='')
-    owner = ''
-    order = ''
+    owner = models.ForeignKey('auth.User', related_name='address', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('created',)
+
+    def save(self, *args, **kwargs):
+        super(Address, self).save(*args, **kwargs)

@@ -12,11 +12,13 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from products.serializers import ProductSerializer
+from products.serializers import ProductSerializer,UserSerializer
 from rest_framework import mixins
 from rest_framework import generics
+from django.contrib.auth.models import User
 
 # Create your views here.
+
 '''
 @api_view(['GET', 'POST'])
 def drink_list(request, format=None):
@@ -136,6 +138,7 @@ class DrinkDetail(mixins.RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 '''
 
+
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -144,3 +147,13 @@ class ProductList(generics.ListCreateAPIView):
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
