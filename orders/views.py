@@ -9,6 +9,7 @@ from django.shortcuts import render
 
 # Create your views here.
 class OrdersList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
@@ -17,5 +18,6 @@ class OrdersList(generics.ListCreateAPIView):
 
 
 class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer

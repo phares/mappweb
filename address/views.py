@@ -9,6 +9,7 @@ from django.shortcuts import render
 
 # Create your views here.
 class AddressList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
@@ -17,5 +18,6 @@ class AddressList(generics.ListCreateAPIView):
 
 
 class AddressDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
