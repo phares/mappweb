@@ -33,6 +33,7 @@ class DrinkSerializer(serializers.Serializer):
 
 # ModelSerializer class
 class ProductSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Product
         fields = ('id','name','price','available','quantity','type','category','owner')

@@ -32,6 +32,7 @@ class DrinkSerializer(serializers.Serializer):
 
 # ModelSerializer class
 class AddressSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Address
         fields = ('id','place','road','contact','house_no','owner')

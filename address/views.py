@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from address.serializers import AddressSerializer
 from address.models import Address
-from rest_framework import generics
+from rest_framework import generics,permissions
 
 from django.shortcuts import render
 
@@ -11,6 +11,9 @@ from django.shortcuts import render
 class AddressList(generics.ListCreateAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class AddressDetail(generics.RetrieveUpdateDestroyAPIView):
