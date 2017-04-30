@@ -3,11 +3,12 @@ from __future__ import unicode_literals
 from address.serializers import AddressSerializer
 from address.models import Address
 from rest_framework import generics,permissions
-
 from django.shortcuts import render
 
 
-# Create your views here.
+from mapp.permissions import IsOwnerOrReadOnly
+
+
 class AddressList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Address.objects.all()
@@ -18,6 +19,7 @@ class AddressList(generics.ListCreateAPIView):
 
 
 class AddressDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
     queryset = Address.objects.all()
     serializer_class = AddressSerializer

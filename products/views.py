@@ -6,18 +6,19 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from products.models import Product
+from products.models import Product,ProductCategory
 from django.http import Http404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from products.serializers import ProductSerializer,UserSerializer
+from products.serializers import ProductSerializer,ProductCategorySerializer
 from rest_framework import mixins
 from rest_framework import generics,permissions
 from django.contrib.auth.models import User
 
 # Create your views here.
+from mapp.permissions import IsOwnerOrReadOnly
 
 '''
 @api_view(['GET', 'POST'])
@@ -149,18 +150,23 @@ class ProductList(generics.ListCreateAPIView):
 
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
-class UserList(generics.ListAPIView):
+class ProductCategoryList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
-class UserDetail(generics.RetrieveAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class ProductCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer

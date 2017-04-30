@@ -4,10 +4,12 @@ from __future__ import unicode_literals
 from orders.serializers import OrderSerializer
 from orders.models import Order
 from rest_framework import generics,permissions
-
 from django.shortcuts import render
 
-# Create your views here.
+
+from mapp.permissions import IsOwnerOrReadOnly
+
+
 class OrdersList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Order.objects.all()
@@ -18,6 +20,7 @@ class OrdersList(generics.ListCreateAPIView):
 
 
 class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from products.models import Product, brands
+from products.models import Product, brands, ProductCategory
 from django.contrib.auth.models import User
 
 # Normal class serializer
@@ -38,8 +38,9 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ('id','name','price','available','quantity','type','category','owner')
 
-class UserSerializer(serializers.ModelSerializer):
-    products = serializers.PrimaryKeyRelatedField(many=True, queryset=Product.objects.all())
+
+# ModelSerializer class
+class ProductCategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('id', 'username', 'products')
+        model = ProductCategory
+        fields = ('id','name','owner')

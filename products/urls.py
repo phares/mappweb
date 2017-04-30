@@ -9,9 +9,8 @@ urlpatterns = [
 
     url(r'^products/$', views.ProductList.as_view()),
     url(r'^products/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view()),
-    url(r'^users/$', views.UserList.as_view()),
-    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
-
+    url(r'^category/$', views.ProductCategoryList.as_view()),
+    url(r'^category/(?P<pk>[0-9]+)/$', views.ProductCategoryDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
