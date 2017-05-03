@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from products.models import Product, brands, ProductCategory
+from products.models import Product, types, ProductCategory
 from django.contrib.auth.models import User
 
 # Normal class serializer
@@ -34,13 +34,15 @@ class DrinkSerializer(serializers.Serializer):
 # ModelSerializer class
 class ProductSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Product
-        fields = ('id','name','price','available','quantity','type','category','owner')
+        fields = ('id','name','price','quantity','category','owner','active')
 
 
 # ModelSerializer class
 class ProductCategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = ProductCategory
-        fields = ('id','name','owner')
+        fields = ('id', 'type', 'name', 'owner', 'active')
