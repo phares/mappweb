@@ -4,7 +4,7 @@ from products.models import Product
 from address.models import Address
 from orders.models import Order
 
-
+'''
 class UserSerializer(serializers.ModelSerializer):
     products = serializers.PrimaryKeyRelatedField(many=True, queryset=Product.objects.all())
     address = serializers.PrimaryKeyRelatedField(many=True, queryset=Address.objects.all())
@@ -13,3 +13,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username','email', 'products', 'address', 'orders')
+'''
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    products = serializers.HyperlinkedRelatedField(many=True, view_name='product-detail', read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('url', 'id', 'username', 'products')

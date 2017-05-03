@@ -5,7 +5,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import renderers
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from products.models import Product,ProductCategory
@@ -21,6 +20,7 @@ from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework import renderers
 
 # Create your views here.
 from mapp.permissions import IsOwnerOrReadOnly
@@ -149,6 +149,7 @@ class DrinkDetail(mixins.RetrieveModelMixin,
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
+        'products': reverse('product-list', request=request, format=format),
     })
 
 

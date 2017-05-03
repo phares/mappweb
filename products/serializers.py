@@ -31,6 +31,7 @@ class DrinkSerializer(serializers.Serializer):
         return instance
 '''
 
+'''
 # ModelSerializer class
 class ProductSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -39,6 +40,8 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ('id','name','price','quantity','category','owner','active')
 
+'''
+
 
 # ModelSerializer class
 class ProductCategorySerializer(serializers.ModelSerializer):
@@ -46,3 +49,12 @@ class ProductCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductCategory
         fields = ('id', 'type', 'name', 'owner', 'active')
+
+
+class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    highlight = serializers.HyperlinkedIdentityField(view_name='product-highlight', format='html')
+
+    class Meta:
+        model = Product
+        fields = ('url', 'id', 'highlight', 'name', 'price', 'quantity', 'category', 'owner', 'active')
