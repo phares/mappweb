@@ -12,7 +12,6 @@ urlpatterns = ([
     url(r'^$', views.api_root),
     url(r'^products/$', views.ProductList.as_view(), name='product-list'),
     url(r'^products/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view(), name='product-detail'),
-    url(r'^products/(?P<pk>[0-9]+)/highlight/$', views.ProductHighlight.as_view(), name='product-highlight'),
     # url(r'^products/$', views.ProductList.as_view()),
     # url(r'^products/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view()),
     url(r'^categories/$', views.ProductCategoryList.as_view(), name='productcategory-list'),

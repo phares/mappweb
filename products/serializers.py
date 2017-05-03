@@ -53,8 +53,7 @@ class ProductCategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    highlight = serializers.HyperlinkedIdentityField(view_name='product-highlight', format='html')
 
     class Meta:
         model = Product
-        fields = ('url', 'id', 'highlight', 'name', 'price', 'quantity', 'category', 'owner', 'active')
+        fields = ('url', 'id', 'name', 'price', 'quantity', 'category', 'owner', 'active')

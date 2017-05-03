@@ -169,15 +169,6 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
 
 
-class ProductHighlight(generics.GenericAPIView):
-    queryset = Product.objects.all()
-    renderer_classes = (renderers.StaticHTMLRenderer,)
-
-    def get(self, request, *args, **kwargs):
-        product = self.get_object()
-        return Response(product.highlighted)
-
-
 class ProductCategoryList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = ProductCategory.objects.all()
