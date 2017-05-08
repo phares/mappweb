@@ -14,7 +14,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from rest_framework import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
 
 urlpatterns = [
     url(r'^', include('products.urls')),
