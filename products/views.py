@@ -148,8 +148,12 @@ class DrinkDetail(mixins.RetrieveModelMixin,
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        'users': reverse('user-list', request=request, format=format),
+        'customers': reverse('user-list', request=request, format=format),
         'products': reverse('product-list', request=request, format=format),
+        'product categories': reverse('productcategory-list', request=request, format=format),
+        'orders': reverse('orders-list', request=request, format=format),
+        'order items': reverse('orderitems-list', request=request, format=format),
+        'address': reverse('address-list', request=request, format=format),
     })
 
 

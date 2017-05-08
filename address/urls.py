@@ -7,7 +7,7 @@ urlpatterns = [
     # url(r'^products/$', views.drink_list),
     # url(r'^products/(?P<pk>[0-9]+)/$', views.drink_detail),
 
-    url(r'^address/$', views.AddressList.as_view()),
+    url(r'^address/$', views.AddressList.as_view(), name='address-list'),
     url(r'^address/(?P<pk>[0-9]+)/$', views.AddressDetail.as_view()),
 ]
 
