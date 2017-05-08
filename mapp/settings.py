@@ -85,10 +85,23 @@ WSGI_APPLICATION = 'mapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'ec2-54-243-187-133.compute-1.amazonaws.com',
+        'NAME': 'd62ddti449g22b',
+        'PASSWORD': '808fa62cc40b8f9c1a8eb371bf8993a336565d8ba5d4efd4a7248a3a7fdd85f4',
+        'PORT': '5432',
+        'USER': 'gzuwukdzennbcx',
     }
 }
 
@@ -111,3 +124,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+DISABLE_COLLECTSTATIC=1
