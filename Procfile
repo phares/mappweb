@@ -1,0 +1,1 @@
+web: gunicorn mapp.wsgi --log-file -
