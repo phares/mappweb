@@ -23,6 +23,7 @@ scandir==1.5
 six==1.10.0
 transaction==2.1.2
 trollius==2.1
+whitenoise==3.3.0
 Whoosh==2.7.4
 zc.lockfile==1.2.1
 ZConfig==3.1.0

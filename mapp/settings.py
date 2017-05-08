@@ -25,7 +25,7 @@ SECRET_KEY = '=^2-mrs3%c7c9z9ko88(&iv#2$j76!ep^d09cpki5x9ck%6r0$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['m-shopping.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','m-shopping.herokuapp.com']
 
 
 # Application definition
@@ -123,4 +123,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static/'),
+    os.path.join(BASE_DIR, 'static/mapp/'),
+)
+
+DEBUG_COLLECTSTATIC=1
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
