@@ -12,7 +12,7 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=100, blank=False,default='')
     owner = models.ForeignKey('auth.User', related_name='categories', on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='products', default='/images/default.jpg')
+    image = models.ImageField(upload_to='categories', default='/images/default.png')
 
 
 class Product(models.Model):
@@ -23,6 +23,7 @@ class Product(models.Model):
     quantity = models.IntegerField(default=0)
     category = models.ForeignKey('products.ProductCategory', related_name='categories', on_delete=models.CASCADE)
     owner = models.ForeignKey('auth.User', related_name='products', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='products', default='/images/default.png')
 
     class Meta:
         ordering = ('created',)
