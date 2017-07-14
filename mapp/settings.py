@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'products',
     'orders',
     'address',
+    'storages',
 )
 
 REST_FRAMEWORK = {
@@ -145,3 +146,14 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+STATICFILES_STORAGE = "mapp.s3utils.StaticS3BotoStorage"
+DEFAULT_FILE_STORAGE = "mapp.s3utils.MediaS3BotoStorage"
+
+
+import ssl
+if hasattr(ssl, '_create_unverified_context'):
+   ssl._create_default_https_context = ssl._create_unverified_context
+
+AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
+AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")

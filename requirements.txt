@@ -1,8 +1,10 @@
 appdirs==1.4.3
+boto==2.48.0
 BTrees==4.4.1
 codegen==1.0
 Django==1.11
 django-filter==1.0.2
+django-storages==1.6.3
 djangorestframework==3.6.2
 drink==0.0.10
 enum34==1.1.6
