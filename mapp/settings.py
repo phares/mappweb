@@ -147,6 +147,15 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+
+AWS_S3_SECURE_URLS = False       # use http instead of https
+AWS_QUERYSTRING_AUTH = False                # don't add complex authentication-related query parameters for requests
+AWS_S3_ACCESS_KEY_ID = "AKIAJHOYPD7FI6LD6STA"                # Your S3 Access Key
+AWS_S3_SECRET_ACCESS_KEY = "Bb9JcT8wsJjDpSc2lRvo4kiswHZJ+Z72sbrh1YGV"            # Your S3 Secret
+AWS_STORAGE_BUCKET_NAME = "media-mappweb"
+AWS_S3_HOST = "s3-us-east-2.amazonaws.com"  # Change to the media center you chose when creating the bucket
+
+
 STATICFILES_STORAGE = "mapp.s3utils.StaticS3BotoStorage"
 DEFAULT_FILE_STORAGE = "mapp.s3utils.MediaS3BotoStorage"
 
@@ -155,5 +164,5 @@ import ssl
 if hasattr(ssl, '_create_unverified_context'):
    ssl._create_default_https_context = ssl._create_unverified_context
 
-AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
-AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")
+# AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
+# AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")

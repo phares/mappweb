@@ -2,9 +2,12 @@ appdirs==1.4.3
 boto==2.48.0
 BTrees==4.4.1
 codegen==1.0
+dj-database-url==0.4.2
+dj-static==0.0.6
 Django==1.11
 django-filter==1.0.2
 django-storages==1.6.3
+django-toolbelt==0.0.1
 djangorestframework==3.6.2
 drink==0.0.10
 enum34==1.1.6
@@ -27,6 +30,7 @@ pytz==2017.2
 requests==2.13.0
 scandir==1.5
 six==1.10.0
+static3==0.7.0
 transaction==2.1.2
 trollius==2.1
 whitenoise==3.3.0
