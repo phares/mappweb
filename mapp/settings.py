@@ -97,7 +97,10 @@ WSGI_APPLICATION = 'mapp.wsgi.application'
 #     }
 # }
 
-DATABASES = os.environ.get("DATABASE_URL", "")
+
+dblink = os.environ.get("DATABASE_URL", "")
+
+DATABASES = {'default': dj_database_url.config(default=dblink)}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
