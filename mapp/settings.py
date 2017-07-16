@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=^2-mrs3%c7c9z9ko88(&iv#2$j76!ep^d09cpki5x9ck%6r0$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','m-shopping.herokuapp.com']
 
@@ -83,21 +83,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mapp.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'HOST': 'ec2-54-243-253-17.compute-1.amazonaws.com',
-#         'NAME': 'd7kodabp1r05vq',
-#         'PASSWORD': '75321b3e2ab4de0e57dbab1e0b2971cc4d6a8b63d82f65d8c25b37d3ce12fd57',
-#         'PORT': '5432',
-#         'USER': 'anhieyosftzuov',
-#     }
-# }
-
-
 dblink = os.environ.get("DATABASE_URL", "")
 
 DATABASES = {'default': dj_database_url.config(default=dblink)}
@@ -143,12 +128,12 @@ STATICFILES_FINDERS = (
 )
 
 
-AWS_S3_SECURE_URLS = False       # use http instead of https
-AWS_QUERYSTRING_AUTH = False                # don't add complex authentication-related query parameters for requests
-AWS_S3_ACCESS_KEY_ID = ""                # Your S3 Access Key
-AWS_S3_SECRET_ACCESS_KEY = ""            # Your S3 Secret
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_ACCESS_KEY_ID = ""
+AWS_S3_SECRET_ACCESS_KEY = ""
 AWS_STORAGE_BUCKET_NAME = ""
-AWS_S3_HOST = ""  # Change to the media center you chose when creating the bucket
+AWS_S3_HOST = ""
 
 
 STATICFILES_STORAGE = "mapp.s3utils.StaticS3BotoStorage"
