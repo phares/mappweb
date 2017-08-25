@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=^2-mrs3%c7c9z9ko88(&iv#2$j76!ep^d09cpki5x9ck%6r0$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','m-shopping.herokuapp.com']
 
@@ -131,8 +131,8 @@ import ssl
 if hasattr(ssl, '_create_unverified_context'):
    ssl._create_default_https_context = ssl._create_unverified_context
 
-# dblink = os.environ.get("DATABASE_URL", "")
-# DATABASES = {'default': dj_database_url.config(default=dblink)}
+dblink = os.environ.get("DATABASE_URL", "")
+DATABASES = {'default': dj_database_url.config(default=dblink)}
 
 AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
