@@ -8,9 +8,9 @@ status = (('ACTIVE', 'Active'), ('CANCEL', 'Cancelled'), ('COMPLETED', 'Complete
 # Create your models here.
 class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey('auth.User', related_name='orders', on_delete=models.CASCADE)
-    address = models.ForeignKey('address.Address', related_name='address', on_delete=models.CASCADE)
-    fee = models.DecimalField(decimal_places=0,max_digits=6,default=0)
+    owner = models.ForeignKey('auth.User', related_name='orders', blank=False, on_delete=models.CASCADE)
+    address = models.ForeignKey('address.Address', related_name='address', blank=False, on_delete=models.CASCADE)
+    fee = models.DecimalField(decimal_places=0,max_digits=6, blank=False,default=0)
     status = models.CharField(choices=status,max_length=20, default='Active')
 
     class Meta:
@@ -22,11 +22,11 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey('auth.User', related_name='items', on_delete=models.CASCADE)
-    product = models.ForeignKey('products.Product', related_name='products', on_delete=models.CASCADE)
-    order = models.ForeignKey('orders.Order', related_name='orders', on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=0)
-    price = models.DecimalField(decimal_places=0,max_digits=6)
+    owner = models.ForeignKey('auth.User', related_name='items', blank=False, on_delete=models.CASCADE)
+    product = models.ForeignKey('products.Product', related_name='products', blank=False, on_delete=models.CASCADE)
+    order = models.ForeignKey('orders.Order', related_name='orders', blank=False, on_delete=models.CASCADE)
+    quantity = models.IntegerField(blank=False)
+    price = models.DecimalField(decimal_places=0, blank=False, max_digits=6)
 
     class Meta:
         ordering = ('created',)

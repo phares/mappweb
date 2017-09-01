@@ -35,4 +35,4 @@ class AddressSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Address
-        fields = ('id','place','road','contact','house_no','owner')
+        fields = ('id', 'place_address', 'place_id', 'name', 'latlng', 'contact','house_no','owner')
