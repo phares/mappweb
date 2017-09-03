@@ -19,10 +19,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^', include('products.urls')),
-    url(r'^', include('orders.urls')),
-    url(r'^', include('address.urls')),
-    url(r'^', include('customers.urls')),
+    url(r'^api/', include('products.urls')),
+    url(r'^api/', include('orders.urls')),
+    url(r'^api/', include('address.urls')),
+    url(r'^api/', include('customers.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
