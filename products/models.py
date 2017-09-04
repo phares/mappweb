@@ -14,6 +14,9 @@ class ProductCategory(models.Model):
     active = models.BooleanField(default=True)
     image = models.ImageField(upload_to='categories', blank=False)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -31,3 +34,6 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         super(Product, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.name

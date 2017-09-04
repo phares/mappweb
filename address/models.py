@@ -20,3 +20,6 @@ class Address(models.Model):
 
     def save(self, *args, **kwargs):
         super(Address, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.place_address

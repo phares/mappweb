@@ -19,6 +19,9 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
 
+    def __unicode__(self):
+        return str(self.id)
+
 
 class OrderItem(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -33,3 +36,6 @@ class OrderItem(models.Model):
 
     def save(self, *args, **kwargs):
         super(OrderItem, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return str(self.id)
