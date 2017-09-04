@@ -24,7 +24,7 @@ SECRET_KEY = '=^2-mrs3%c7c9z9ko88(&iv#2$j76!ep^d09cpki5x9ck%6r0$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['127.0.0.1','m-shopping.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','m-shopping.herokuapp.com','mshoppingke.herokuapp.com']
 
 
 # Application definition
