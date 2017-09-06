@@ -7,13 +7,26 @@ from customers.models import Feedback
 from mapp.permissions import IsOwnerOrReadOnly
 
 
-class UserList(generics.ListAPIView):
+# class UserList(generics.ListAPIView):
+#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#
+#
+# class UserDetail(generics.RetrieveAPIView):
+#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+#                           IsOwnerOrReadOnly)
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+
+class UserList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class UserDetail(generics.RetrieveAPIView):
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly)
     queryset = User.objects.all()
