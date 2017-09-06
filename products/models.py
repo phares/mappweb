@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 
-types = (('DRINK','drink'),('VEGETABLE','vegetable'))
+types = (('DRINK', 'drink'), ('VEGETABLE', 'vegetable'))
 
 
 # Create your models here.
@@ -20,7 +20,8 @@ class ProductCategory(models.Model):
     def save(self, *args, **kwargs):
         super(ProductCategory, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    # def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
