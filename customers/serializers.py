@@ -23,6 +23,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Feedback
