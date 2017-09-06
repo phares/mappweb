@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from rest_framework import generics,viewsets,permissions
+from rest_framework import generics,permissions
 from customers.serializers import UserSerializer
 from customers.serializers import FeedbackSerializer
 from customers.models import Feedback
+from mapp.permissions import IsOwnerOrReadOnly
 
 
 class UserList(generics.ListAPIView):
@@ -12,19 +14,27 @@ class UserList(generics.ListAPIView):
 
 
 class UserDetail(generics.RetrieveAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class FeedbackList(generics.ListAPIView):
+class FeedbackList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
-class FeedbackDetail(generics.RetrieveAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+class FeedbackDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+
+
+
 

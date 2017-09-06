@@ -14,6 +14,12 @@ class ProductCategory(models.Model):
     active = models.BooleanField(default=True)
     image = models.ImageField(upload_to='categories', blank=False)
 
+    class Meta:
+        ordering = ('created',)
+
+    def save(self, *args, **kwargs):
+        super(ProductCategory, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return self.name
 
