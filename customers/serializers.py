@@ -3,6 +3,7 @@ from rest_framework import serializers
 from products.models import Product
 from address.models import Address
 from orders.models import Order
+from customers.models import Feedback
 
 '''
 class UserSerializer(serializers.ModelSerializer):
@@ -22,3 +23,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'id', 'username', 'products')
+
+
+class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Feedback
+        fields = ('id', 'url', 'owner', 'message')
