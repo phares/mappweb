@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from customers import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = ([
 
