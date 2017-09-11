@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^api/', include('address.urls')),
     url(r'^api/', include('customers.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^rest-auth/', include('rest_auth.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
