@@ -43,17 +43,19 @@ class ProductSerializer(serializers.ModelSerializer):
 '''
 
 
-# ModelSerializer class
-class ProductCategorySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ProductCategory
-        fields = ('url', 'id', 'type', 'name', 'owner', 'active', 'image')
-
-
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Product
         fields = ('url', 'id', 'name', 'volume', 'price', 'quantity', 'category', 'owner', 'active', 'image')
+
+
+# ModelSerializer class
+class ProductCategorySerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ProductCategory
+        fields = ('url', 'id', 'type', 'name', 'owner', 'active', 'image','products')
+

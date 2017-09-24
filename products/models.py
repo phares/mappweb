@@ -32,7 +32,7 @@ class Product(models.Model):
     active = models.BooleanField(default=True)
     volume = models.IntegerField(blank=False)
     quantity = models.IntegerField(blank=False)
-    category = models.ForeignKey('products.ProductCategory', blank=False, related_name='categories', on_delete=models.CASCADE)
+    category = models.ForeignKey('products.ProductCategory', blank=False, related_name='products', on_delete=models.CASCADE)
     owner = models.ForeignKey('auth.User', related_name='products',blank=False, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='products', blank=False)
 

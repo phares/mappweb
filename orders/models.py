@@ -27,7 +27,7 @@ class OrderItem(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('auth.User', related_name='items', blank=False, on_delete=models.CASCADE)
     product = models.ForeignKey('products.Product', related_name='products', blank=False, on_delete=models.CASCADE)
-    order = models.ForeignKey('orders.Order', related_name='orders', blank=False, on_delete=models.CASCADE)
+    order = models.ForeignKey('orders.Order', related_name='items', blank=False, on_delete=models.CASCADE)
     quantity = models.IntegerField(blank=False)
     price = models.DecimalField(decimal_places=0, blank=False, max_digits=6)
 
