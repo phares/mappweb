@@ -130,27 +130,18 @@ DEFAULT_FILE_STORAGE = "mapp.s3utils.MediaS3BotoStorage"
 import ssl
 if hasattr(ssl, '_create_unverified_context'):
    ssl._create_default_https_context = ssl._create_unverified_context
-#
-# dblink = os.environ.get("DATABASE_URL", "")
-# DATABASES = {'default': dj_database_url.config(default=dblink)}
 
-# DEBUG = False
-#
-# AWS_S3_SECURE_URLS = False
-# AWS_QUERYSTRING_AUTH = False
-# AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
-# AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")
-# AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
-# AWS_S3_HOST = os.environ.get("AWS_S3_HOST", "")
+dblink = os.environ.get("DATABASE_URL", "")
+DATABASES = {'default': dj_database_url.config(default=dblink)}
 
-DEBUG = True
+DEBUG = False
 
-AWS_S3_ACCESS_KEY_ID = "AKIAJRTCIPDARMZMJL4Q"
-AWS_S3_SECRET_ACCESS_KEY = "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"
-AWS_STORAGE_BUCKET_NAME = "media-mappweb"
-AWS_S3_HOST = "s3-us-east-2.amazonaws.com"
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
+AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+AWS_S3_HOST = os.environ.get("AWS_S3_HOST", "")
 
-dblinkdev = 'postgres://anhieyosftzuov:75321b3e2ab4de0e57dbab1e0b2971cc4d6a8b63d82f65d8c25b37d3ce12fd57@ec2-54-243-253-17.compute-1.amazonaws.com:5432/d7kodabp1r05vq'
-dblinkprod = 'postgres://wmmfwcfzyjtstz:bf80aa6d28657323899d9ce10aa8bb9adaf41cffad2776576dd370cce23d725d@ec2-23-21-197-175.compute-1.amazonaws.com:5432/ddingam7b5so11'
-DATABASES = {'default': dj_database_url.config(default=dblinkdev)}
+
 
