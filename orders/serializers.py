@@ -2,10 +2,7 @@ from rest_framework import serializers
 from orders.models import Order, OrderItem
 from address.serializers import AddressSerializer
 from products.serializers import ProductSerializer
-
-
-# Normal class serializer
-# ModelSerializer class
+from address.models import Address
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
@@ -21,9 +18,11 @@ class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True, read_only=True)
     address = AddressSerializer(many=False, read_only=True)
     owner = serializers.ReadOnlyField(source='owner.username')
+    address_id = serializers.PrimaryKeyRelatedField(
+        queryset=Address.objects.all(), source='address', write_only=True)
 
     class Meta:
         model = Order
-        fields = ('id', 'created', 'owner', 'address', 'fee', 'status', 'items')
+        fields = ('id', 'created','address','address_id', 'owner', 'fee', 'status', 'items')
 
 

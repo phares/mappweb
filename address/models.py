@@ -22,4 +22,4 @@ class Address(models.Model):
         super(Address, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return self.place_address
+        return str(self.id)
