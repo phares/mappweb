@@ -43,4 +43,4 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return self.name
+        return str(self.id)
