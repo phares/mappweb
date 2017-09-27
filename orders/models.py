@@ -14,7 +14,7 @@ class Order(models.Model):
     status = models.CharField(choices=status,max_length=20, default='Active')
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
