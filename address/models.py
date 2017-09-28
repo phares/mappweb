@@ -16,7 +16,7 @@ class Address(models.Model):
     owner = models.ForeignKey('auth.User', related_name='address', blank=False, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
     def save(self, *args, **kwargs):
         super(Address, self).save(*args, **kwargs)

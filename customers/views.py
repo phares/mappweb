@@ -21,19 +21,19 @@ from mapp.permissions import IsOwnerOrReadOnly
 
 
 class UserList(generics.ListCreateAPIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAdminUser,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = permissions.IsAuthenticatedOrReadOnly
+    permission_classes = permissions.IsAdminUser
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class FeedbackList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAdminUser,)
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
 
@@ -42,8 +42,7 @@ class FeedbackList(generics.ListCreateAPIView):
 
 
 class FeedbackDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
+    permission_classes = (permissions.IsAdminUser,)
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
 
