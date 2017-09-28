@@ -114,7 +114,7 @@ APPEND_SLASH = True
 
 SITE_ID = 1
 
-DEBUG_COLLECTSTATIC=1
+DEBUG_COLLECTSTATIC = 1
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 

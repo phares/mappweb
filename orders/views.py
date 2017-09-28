@@ -9,9 +9,16 @@ from mapp.permissions import IsOwnerOrReadOnly
 
 
 class OrdersList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Order.objects.all()
+        elif self.request.user.is_staff:
+            return Order.objects.all()
+        else:
+            return Order.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
