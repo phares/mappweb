@@ -21,7 +21,7 @@ from mapp.permissions import IsOwnerOrReadOnly
 
 
 class UserList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
