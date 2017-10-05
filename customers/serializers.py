@@ -13,7 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username','email', 'products', 'address', 'orders')
 '''
 
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     products = serializers.HyperlinkedRelatedField(many=True, view_name='product-detail', read_only=True)
     password = serializers.CharField(write_only=True)
