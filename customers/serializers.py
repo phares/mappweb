@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from orders.models import Order
 from customers.models import Feedback
 
 '''
@@ -12,6 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username','email', 'products', 'address', 'orders')
 '''
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     products = serializers.HyperlinkedRelatedField(many=True, view_name='product-detail', read_only=True)
@@ -29,9 +31,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 
-class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
+class FeedbackSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Feedback
-        fields = ('id', 'owner', 'message')
+        fields = ('id', 'owner', 'message', 'order')

@@ -7,6 +7,7 @@ class Feedback(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('auth.User', related_name='customers', blank=False, on_delete=models.CASCADE)
     message = models.CharField(max_length=140, blank=False)
+    order = models.ForeignKey('orders.Order', related_name='feedback', blank=False, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('created',)
