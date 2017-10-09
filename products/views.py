@@ -154,6 +154,9 @@ def api_root(request, format=None):
         'orders': reverse('orders-list', request=request, format=format),
         'order items': reverse('orderitems-list', request=request, format=format),
         'address': reverse('address-list', request=request, format=format),
+        'feedback': reverse('feedback-list', request=request, format=format),
+        'stores': reverse('store-list', request=request, format=format),
+        'transporters': reverse('transporter-list', request=request, format=format),
     })
 
 

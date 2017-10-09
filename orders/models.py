@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
-status = (('ACTIVE', 'Active'), ('CANCEL', 'Cancelled'), ('COMPLETED', 'Completed'))
+status = (('ACTIVE', 'ACTIVE'), ('CANCELLED', 'CANCELLED'), ('COMPLETED', 'COMPLETED'),
+          ('PROCESSING', 'PROCESSING'), ('FAILED', 'FAILED'), ('RECEIVED', 'RECEIVED'))
 
 
 # Create your models here.

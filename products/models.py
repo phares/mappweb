@@ -9,7 +9,7 @@ types = (('DRINK', 'drink'), ('VEGETABLE', 'vegetable'))
 class ProductCategory(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     type = models.CharField(choices=types, blank=False, max_length=100)
-    name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, unique=True, blank=False)
     owner = models.ForeignKey('auth.User', related_name='categories', blank=False, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     image = models.ImageField(upload_to='categories', blank=False)
@@ -27,7 +27,7 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, unique=True, blank=False)
     price = models.DecimalField(decimal_places=0, blank=False, max_digits=6)
     active = models.BooleanField(default=True)
     volume = models.IntegerField(blank=False)
