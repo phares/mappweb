@@ -29,7 +29,7 @@ class Transporter(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('auth.User', related_name='transporter', blank=False)
     address = models.ForeignKey('address.Address', related_name='transporter_address', blank=False)
-    store = models.ForeignKey('store.Store', related_name='store', blank=False)
+    store = models.ForeignKey('store.Store', related_name='transporters', blank=False)
     user = models.OneToOneField(User, unique=True, related_name='transport_user', blank=False)
     active = models.BooleanField(default=True)
 

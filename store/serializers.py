@@ -8,15 +8,16 @@ from products.models import Product
 from store.models import Store, Transporter
 
 
-class StoreSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Store
-        fields = ('id', 'created', 'name', 'address', 'user', 'active')
-
-
 class TransporterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transporter
         fields = ('id', 'created', 'address', 'store', 'user', 'active')
+
+
+class StoreSerializer(serializers.ModelSerializer):
+    transporters = TransporterSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Store
+        fields = ('id', 'created', 'name', 'address', 'user', 'active', 'transporters')
