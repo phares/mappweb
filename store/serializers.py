@@ -1,10 +1,4 @@
 from rest_framework import serializers
-from orders.models import Order, OrderItem
-from address.serializers import AddressSerializer
-from products.serializers import ProductSerializer
-from address.models import Address
-from products.models import Product
-
 from store.models import Store, Transporter
 
 

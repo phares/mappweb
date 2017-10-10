@@ -23,21 +23,21 @@ class StoreList(generics.ListCreateAPIView):
         elif self.request.user.is_staff:
             return Store.objects.all()
         else:
-            return Store.objects.filter(owner=self.request.user)
+            return Store.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
 
 class StoreDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+    permission_classes = (permissions.IsAuthenticated,
                           IsOwnerOrReadOnly)
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
 
 
 class TransporterList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Transporter.objects.all()
     serializer_class = TransporterSerializer
 
@@ -46,7 +46,7 @@ class TransporterList(generics.ListCreateAPIView):
 
 
 class TransporterDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+    permission_classes = (permissions.IsAuthenticated,
                           IsOwnerOrReadOnly)
     queryset = Transporter.objects.all()
     serializer_class = TransporterSerializer
