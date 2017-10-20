@@ -152,6 +152,7 @@ def api_root(request, format=None):
         'products': reverse('product-list', request=request, format=format),
         'product categories': reverse('productcategory-list', request=request, format=format),
         'orders': reverse('orders-list', request=request, format=format),
+        'Store orders': reverse('ordersstore-list', request=request, format=format),
         'order items': reverse('orderitems-list', request=request, format=format),
         'address': reverse('address-list', request=request, format=format),
         'feedback': reverse('feedback-list', request=request, format=format),
