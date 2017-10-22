@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from store.models import Store, Transporter
+from customers.serializers import UserSerializer
 
 
 class TransporterSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False, read_only=True)
 
     class Meta:
         model = Transporter

@@ -17,8 +17,6 @@ class Order(models.Model):
     store = models.ForeignKey('store.Store', related_name='store', blank=True, default=1)
     transporter = models.ForeignKey('store.Transporter', related_name='transporter', blank=True,default=1)
 
-
-
     class Meta:
         ordering = ('-created',)
 
