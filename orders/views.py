@@ -10,6 +10,8 @@ from orders.serializers import OrderStoreSerializer
 
 
 # All Orders
+
+
 class OrdersList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderSerializer
@@ -27,10 +29,16 @@ class OrdersList(generics.ListCreateAPIView):
 
 
 class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
-    queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Order.objects.all()
+        elif self.request.user.is_staff:
+            return Order.objects.all()
+        else:
+            return Order.objects.filter(owner=self.request.user)
 
 # End all orders
 
@@ -52,10 +60,17 @@ class OrdersStoreList(generics.ListCreateAPIView):
 
 
 class OrdersStoreDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
-    queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderStoreSerializer
+
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Order.objects.all()
+        elif self.request.user.is_staff:
+            return Order.objects.all()
+        else:
+            return Order.objects.filter(store__user=self.request.user)
 # End all orders store
 
 # All Orders Store New
@@ -76,10 +91,17 @@ class OrdersStoreReceivedList(generics.ListCreateAPIView):
 
 
 class OrdersStoreReceivedDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
-    queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderStoreSerializer
+
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Order.objects.filter(status="RECEIVED")
+        elif self.request.user.is_staff:
+            return Order.objects.filter(status="RECEIVED")
+        else:
+            return Order.objects.filter(store__user=self.request.user, status="RECEIVED")
 # End all orders store New
 
 
@@ -101,10 +123,16 @@ class OrdersStoreProcessingList(generics.ListCreateAPIView):
 
 
 class OrdersStoreProcessingDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
-    queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderStoreSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Order.objects.filter(status="PROCESSING")
+        elif self.request.user.is_staff:
+            return Order.objects.filter(status="PROCESSING")
+        else:
+            return Order.objects.filter(store__user=self.request.user, status="PROCESSING")
 # End all orders store process
 
 
@@ -126,16 +154,23 @@ class OrdersStoreCompleteList(generics.ListCreateAPIView):
 
 
 class OrdersStoreCompleteDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
-    queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderStoreSerializer
+
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Order.objects.filter(status="COMPLETED")
+        elif self.request.user.is_staff:
+            return Order.objects.filter(status="COMPLETED")
+        else:
+            return Order.objects.filter(store__user=self.request.user, status="COMPLETED")
 # End all orders store complete
 
 
 # Order Item list
 class OrdersItemList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
 
@@ -144,8 +179,7 @@ class OrdersItemList(generics.ListCreateAPIView):
 
 
 class OrdersItemDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
 # End Order Item list
