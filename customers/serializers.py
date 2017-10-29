@@ -16,12 +16,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    products = serializers.HyperlinkedRelatedField(many=True, view_name='product-detail', read_only=True)
+    # products = serializers.HyperlinkedRelatedField(many=True, view_name='product-detail', read_only=True)
     password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'email', 'password', 'first_name', 'last_name', 'products')
+        fields = ('url', 'id', 'username', 'email', 'password', 'first_name', 'last_name')
 
     def create(self, validated_data):
         user = User(email=validated_data['email'], username=validated_data['username'],
