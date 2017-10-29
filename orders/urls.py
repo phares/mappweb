@@ -8,6 +8,12 @@ urlpatterns = ([
     url(r'^orders/(?P<pk>[0-9]+)/$', views.OrdersDetail.as_view(),),
     url(r'^orders_store/$', views.OrdersStoreList.as_view(), name='ordersstore-list'),
     url(r'^orders_store/(?P<pk>[0-9]+)/$', views.OrdersStoreDetail.as_view(),),
+    url(r'^orders_store_received/$', views.OrdersStoreReceivedList.as_view(), name='ordersstorereceived-list'),
+    url(r'^orders_store_received/(?P<pk>[0-9]+)/$', views.OrdersStoreReceivedDetail.as_view(), ),
+    url(r'^orders_store_processing/$', views.OrdersStoreProcessingList.as_view(), name='ordersstoreprocessing-list'),
+    url(r'^orders_store_processing/(?P<pk>[0-9]+)/$', views.OrdersStoreProcessingDetail.as_view(), ),
+    url(r'^orders_store_complete/$', views.OrdersStoreCompleteList.as_view(), name='ordersstorecomplete-list'),
+    url(r'^orders_store_complete/(?P<pk>[0-9]+)/$', views.OrdersStoreCompleteDetail.as_view(), ),
     url(r'^order_items/$', views.OrdersItemList.as_view(), name='orderitems-list'),
     url(r'^order_items/(?P<pk>[0-9]+)/$', views.OrdersItemDetail.as_view()),
 

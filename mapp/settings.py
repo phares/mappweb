@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os, dj_database_url
+import os, dj_database_url, ssl
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -128,7 +128,6 @@ STATICFILES_STORAGE = "mapp.s3utils.StaticS3BotoStorage"
 DEFAULT_FILE_STORAGE = "mapp.s3utils.MediaS3BotoStorage"
 
 
-import ssl
 if hasattr(ssl, '_create_unverified_context'):
    ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -143,5 +142,4 @@ AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
 AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
 AWS_S3_HOST = os.environ.get("AWS_S3_HOST", "")
-
 
