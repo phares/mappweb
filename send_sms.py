@@ -10,10 +10,12 @@ def send_message():
 
     # Specify the numbers that you want to send to in a comma-separated list
     # Please ensure you include the country code (+254 for Kenya)
-    to = "+254790331936"
+    to = "+254790331936,254708042980"
+    # to = "+254708042980"
+
 
     # And of course we want our recipients to know what we really do
-    message = "New M Shopping Order"
+    message = "New M Shopping Order Alert"
 
     # Create a new instance of our awesome gateway class
     gateway = AfricasTalkingGateway(username, apikey)
