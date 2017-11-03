@@ -63,7 +63,6 @@ class OrdersStoreDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderStoreSerializer
 
-
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Order.objects.all()
@@ -72,6 +71,7 @@ class OrdersStoreDetail(generics.RetrieveUpdateDestroyAPIView):
         else:
             return Order.objects.filter(store__user=self.request.user)
 # End all orders store
+
 
 # All Orders Store New
 class OrdersStoreReceivedList(generics.ListCreateAPIView):
@@ -93,7 +93,6 @@ class OrdersStoreReceivedList(generics.ListCreateAPIView):
 class OrdersStoreReceivedDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderStoreSerializer
-
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -156,7 +155,6 @@ class OrdersStoreCompleteList(generics.ListCreateAPIView):
 class OrdersStoreCompleteDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = OrderStoreSerializer
-
 
     def get_queryset(self):
         if self.request.user.is_superuser:

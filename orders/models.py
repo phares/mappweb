@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.db import models
+
+from send_sms import send_message
+
 status = (('ACTIVE', 'ACTIVE'), ('CANCELLED', 'CANCELLED'), ('COMPLETED', 'COMPLETED'),
           ('PROCESSING', 'PROCESSING'), ('FAILED', 'FAILED'), ('RECEIVED', 'RECEIVED'))
 
@@ -22,6 +24,7 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
+        send_message()
 
     def __unicode__(self):
         return str(self.id)
