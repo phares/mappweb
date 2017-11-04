@@ -44,7 +44,7 @@ def send_message():
         #                                                         recipient['status'],
         #                                                         recipient['messageId'],
         #                                                         recipient['cost'])
-    except AfricasTalkingGatewayException, e:
+    except AfricasTalkingGatewayException:
         pass
         # print 'Encountered an error while sending: %s' % str(e)
 
