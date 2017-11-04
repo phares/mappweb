@@ -38,12 +38,13 @@ def send_message():
 
         results = gateway.sendMessage(to, message)
 
-        for recipient in results:
-            # status is either "Success" or "error message"
-            print 'number=%s;status=%s;messageId=%s;cost=%s' % (recipient['number'],
-                                                                recipient['status'],
-                                                                recipient['messageId'],
-                                                                recipient['cost'])
+        # for recipient in results:
+        #     # status is either "Success" or "error message"
+        #     print 'number=%s;status=%s;messageId=%s;cost=%s' % (recipient['number'],
+        #                                                         recipient['status'],
+        #                                                         recipient['messageId'],
+        #                                                         recipient['cost'])
     except AfricasTalkingGatewayException, e:
-        print 'Encountered an error while sending: %s' % str(e)
+        pass
+        # print 'Encountered an error while sending: %s' % str(e)
 
