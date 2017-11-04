@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
 
 status = (('ACTIVE', 'ACTIVE'), ('CANCELLED', 'CANCELLED'), ('COMPLETED', 'COMPLETED'),
           ('PROCESSING', 'PROCESSING'), ('FAILED', 'FAILED'), ('RECEIVED', 'RECEIVED'))
@@ -23,17 +22,6 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
-
-        username = "mapp"
-        apikey = "8d6120bfabf513f8fa76ab894ea70ba197b64da4ce33132a3002bec014f07ca7"
-        to = "+254790331936"
-        # to = "+254708042980"
-        message = "New M Shopping Order Alert"
-        gateway = AfricasTalkingGateway(username, apikey)
-        try:
-            gateway.sendMessage(to, message)
-        except AfricasTalkingGatewayException:
-            pass
 
     def __unicode__(self):
         return str(self.id)
