@@ -10,7 +10,7 @@ def send_message():
 
     # Specify the numbers that you want to send to in a comma-separated list
     # Please ensure you include the country code (+254 for Kenya)
-    to = "+254790331936,254708042980"
+    to = "+254790331936"
     # to = "+254708042980"
 
 
@@ -44,7 +44,7 @@ def send_message():
         #                                                         recipient['status'],
         #                                                         recipient['messageId'],
         #                                                         recipient['cost'])
-    except AfricasTalkingGatewayException:
-        pass
+    except AfricasTalkingGatewayException as e:
+        print e
         # print 'Encountered an error while sending: %s' % str(e)
 
