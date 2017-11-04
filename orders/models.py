@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 
-from send_sms import send_message
+from mapp.send_sms import send_message
 
 status = (('ACTIVE', 'ACTIVE'), ('CANCELLED', 'CANCELLED'), ('COMPLETED', 'COMPLETED'),
           ('PROCESSING', 'PROCESSING'), ('FAILED', 'FAILED'), ('RECEIVED', 'RECEIVED'))
