@@ -16,21 +16,7 @@ def send_order_sms() :
     # Create a new instance of our awesome gateway class
     gateway = AfricasTalkingGateway(username, apikey)
 
-    # *************************************************************************************
-    #  NOTE: If connecting to the sandbox:
-    #
-    #  1. Use "sandbox" as the username
-    #  2. Use the apiKey generated from your sandbox application
-    #     https://account.africastalking.com/apps/sandbox/settings/key
-    #  3. Add the "sandbox" flag to the constructor
-    #
-    #  gateway = AfricasTalkingGateway(username, apiKey, "sandbox");
-    # **************************************************************************************
-
-    # Any gateway errors will be captured by our custom Exception class below,
-    # so wrap the call in a try-catch block
     try:
-        # Thats it, hit send and we'll take care of the rest.
 
         results = gateway.sendMessage(to, message)
 
