@@ -289,8 +289,8 @@ class AfricasTalkingGateway:
             else:
                 request = urllib2.Request(urlString, headers = headers)
             response = urllib2.urlopen(request)
-        except urllib2.error as e:
-            raise AfricasTalkingGatewayException(e.read())
+        # except urllib2.HTTPError as e:
+        #     raise AfricasTalkingGatewayException(e.read())
         else:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
@@ -309,8 +309,8 @@ class AfricasTalkingGateway:
                                        data_,
                                        headers = headers)
             response = urllib2.urlopen(request)
-        except urllib2.error as e:
-            raise AfricasTalkingGatewayException(e.read())
+        # except urllib2.HTTPError as e:
+        #     raise AfricasTalkingGatewayException(e.read())
         else:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
