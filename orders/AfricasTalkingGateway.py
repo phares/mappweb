@@ -280,17 +280,17 @@ class AfricasTalkingGateway:
 
     # HTTP access method
     def sendRequest(self, urlString, data_ = None):
-        # try:
-        headers = {'Accept' : 'application/json',
-                   'apikey' : self.apiKey}
-        if data_ is not None:
-            data    = urllib.urlencode(data_)
-            request = urllib2.Request(urlString, data, headers = headers)
-        else:
-            request = urllib2.Request(urlString, headers = headers)
-        response = urllib2.urlopen(request)
-        # except urllib2.HTTPError as e:
-        #     raise AfricasTalkingGatewayException(e.read())
+        try:
+            headers = {'Accept' : 'application/json',
+                       'apikey' : self.apiKey}
+            if data_ is not None:
+                data    = urllib.urlencode(data_)
+                request = urllib2.Request(urlString, data, headers = headers)
+            else:
+                request = urllib2.Request(urlString, headers = headers)
+            response = urllib2.urlopen(request)
+        except :
+            raise AfricasTalkingGatewayException()
         else:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
@@ -301,16 +301,16 @@ class AfricasTalkingGateway:
             return response
 
     def sendJSONRequest(self, urlString, data_):
-        # try:
-        headers  = {'Accept'       : 'application/json',
-                    'Content-Type' : 'application/json',
-                    'apikey'       : self.apiKey}
-        request  = urllib2.Request(urlString,
-                                   data_,
-                                   headers = headers)
-        response = urllib2.urlopen(request)
-        # except urllib2.HTTPError as e:
-        #     raise AfricasTalkingGatewayException(e.read())
+        try:
+            headers  = {'Accept'       : 'application/json',
+                        'Content-Type' : 'application/json',
+                        'apikey'       : self.apiKey}
+            request  = urllib2.Request(urlString,
+                                       data_,
+                                       headers = headers)
+            response = urllib2.urlopen(request)
+        except :
+            raise AfricasTalkingGatewayException()
         else:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
