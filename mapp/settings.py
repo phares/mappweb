@@ -134,7 +134,7 @@ if hasattr(ssl, '_create_unverified_context'):
 dblink = os.environ.get("DATABASE_URL", "")
 DATABASES = {'default': dj_database_url.config(default=dblink)}
 
-DEBUG = False
+DEBUG = True
 
 AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
