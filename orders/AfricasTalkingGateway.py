@@ -13,7 +13,7 @@
 """
 
 import urllib
-import urllib.request  as urllib2
+import urllib as urllib2
 import json
 
 class AfricasTalkingGatewayException(Exception):
