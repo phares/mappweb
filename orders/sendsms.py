@@ -1,5 +1,5 @@
 # Import the helper gateway class
-from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
+from orders.AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
 
 def send_order_sms() :
     # Specify your login credentials
