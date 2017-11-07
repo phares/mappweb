@@ -27,7 +27,7 @@ def send_order_sms() :
         #                                                         recipient['messageId'],
         #                                                         recipient['cost'])
 
-    except AfricasTalkingGatewayException, e:
+    except AfricasTalkingGatewayException as e:
         pass
         # print 'Encountered an error while sending: %s' % str(e)
 
