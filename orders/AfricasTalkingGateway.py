@@ -295,7 +295,8 @@ class AfricasTalkingGateway:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
             if self.Debug:
-                print "Raw response: " + response
+                pass
+                # print "Raw response: " + response
                 
             return response
 
@@ -314,7 +315,8 @@ class AfricasTalkingGateway:
             self.responseCode = response.getcode()
             response          = ''.join(response.readlines())
             if self.Debug:
-                print "Raw response: " + response
+                pass
+                # print "Raw response: " + response
                 
             return response
         
