@@ -26,7 +26,7 @@ class Order(models.Model):
         #Send sms via url.
         sms_url = 'https://api.africastalking.com/restless/send?username=mapp&' \
               'Apikey=0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2&' \
-              'to=+254719301140&message=New M Shopping Order Alert.'
+              'to=+254719301140, +254708042980&message=New M Shopping Order Alert.'
         urllib.urlopen(sms_url)
 
     def __unicode__(self):
