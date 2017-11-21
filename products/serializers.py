@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from products.models import Product, types, ProductCategory
+from products.models import Product, types, ProductCategory, Display
 from django.contrib.auth.models import User
 
 # Normal class serializer
@@ -58,4 +58,11 @@ class ProductCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductCategory
         fields = ('url', 'id', 'type', 'name', 'owner', 'active', 'image','products')
+
+
+class DisplaySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Display
+        fields = ('id', 'name', 'owner', 'active', 'image')
 

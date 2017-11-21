@@ -7,13 +7,13 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from products.models import Product,ProductCategory
+from products.models import Product, ProductCategory, Display
 from django.http import Http404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from products.serializers import ProductSerializer,ProductCategorySerializer
+from products.serializers import ProductSerializer, ProductCategorySerializer, DisplaySerializer
 from rest_framework import mixins
 from rest_framework import generics,permissions
 from django.contrib.auth.models import User
@@ -161,6 +161,7 @@ def api_root(request, format=None):
         'feedback': reverse('feedback-list', request=request, format=format),
         'stores': reverse('store-list', request=request, format=format),
         'transporters': reverse('transporter-list', request=request, format=format),
+        'display images': reverse('display-list', request=request, format=format),
     })
 
 
@@ -194,3 +195,19 @@ class ProductCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
                           IsOwnerOrReadOnly)
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategorySerializer
+
+
+class DisplayList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Display.objects.all()
+    serializer_class = DisplaySerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class DisplayDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
+    queryset = Display.objects.all()
+    serializer_class = DisplaySerializer

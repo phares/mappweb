@@ -44,3 +44,20 @@ class Product(models.Model):
 
     def __unicode__(self):
         return str(self.id)
+
+
+class Display(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=100, unique=True, blank=False)
+    active = models.BooleanField(default=False)
+    owner = models.ForeignKey('auth.User', related_name='display')
+    image = models.ImageField(upload_to='display', blank=False)
+
+    class Meta:
+        ordering = ('created',)
+
+    def save(self, *args, **kwargs):
+        super(Display, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return str(self.id)
