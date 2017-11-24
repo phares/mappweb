@@ -64,5 +64,5 @@ class DisplaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Display
-        fields = ('id', 'name', 'owner', 'active', 'image')
+        fields = ('id', 'name', 'active', 'image')
 
