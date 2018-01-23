@@ -5,10 +5,10 @@ from django.contrib import admin
 
 
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ["created", "name", "active", "volume", "category", "image"]
+    list_display = ["created", "name", "price", "active", "volume", "category", "image"]
     list_filter = ["active", "category"]
-    list_editable = []
-    search_fields = ["name", "category"]
+    list_editable = ["active", "price", "name"]
+    search_fields = ["name"]
 
     class Meta:
         model = Product
@@ -20,7 +20,7 @@ admin.site.register(Product, ProductModelAdmin)
 class ProductCategoryModelAdmin(admin.ModelAdmin):
     list_display = ["created", "name", "active", "image"]
     list_filter = ["name"]
-    list_editable = ["name"]
+    list_editable = ["name", "active"]
     search_fields = ["name"]
 
     class Meta:
