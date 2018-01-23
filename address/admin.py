@@ -5,7 +5,7 @@ from .models import Address
 
 
 class AddressModelAdmin(admin.ModelAdmin):
-    list_display = ["place_address", "place_id", "name", "latlng", "contact", "house_no", "owner"]
+    list_display = ["place_address", "name", "latlng", "owner"]
     list_filter = ["place_address", "name"]
     list_editable = []
     search_fields = []

@@ -19,7 +19,7 @@ admin.site.register(Store, StoreModelAdmin)
 
 class TransporterModelAdmin(admin.ModelAdmin):
     list_display = ["created", "address", "store", "user", "active"]
-    list_filter = ["user", "store"]
+    list_filter = []
     list_editable = []
     search_fields = ["user", "name"]
 
