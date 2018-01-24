@@ -40,8 +40,8 @@ class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
         else:
             return Order.objects.filter(owner=self.request.user)
 
-    def perform_update(self, serializer):
-        serializer.save()
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
 # End all orders
 
