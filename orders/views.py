@@ -40,8 +40,12 @@ class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
         else:
             return Order.objects.filter(owner=self.request.user)
 
-    def perform_update(self, serializer):
-        serializer.save(owner=self.request.user)
+
+class OrdersUpdateView(generics.UpdateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    lookup_field = 'id'
+
 
 # End all orders
 
