@@ -10,23 +10,24 @@ status = (('ACTIVE', 'ACTIVE'), ('CANCELLED', 'CANCELLED'), ('COMPLETED', 'COMPL
 # Create your models here.
 class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey('auth.User', related_name='orders', blank=False, on_delete=models.CASCADE)
-    address = models.ForeignKey('address.Address', related_name='address', blank=False, on_delete=models.CASCADE)
-    fee = models.DecimalField(decimal_places=0,max_digits=6, blank=False,default=0)
-    status = models.CharField(choices=status,max_length=20, default='RECEIVED')
+    owner = models.ForeignKey('auth.User', related_name='orders', blank=False)
+    address = models.ForeignKey('address.Address', related_name='address', blank=False)
+    fee = models.DecimalField(decimal_places=0, max_digits=6, blank=False, default=0)
+    status = models.CharField(choices=status, max_length=20, default='RECEIVED')
     quantity = models.IntegerField(blank=False, default=0)
     store = models.ForeignKey('store.Store', related_name='store', blank=True, default=1)
-    transporter = models.ForeignKey('store.Transporter', related_name='transporter', blank=True,default=1)
+    transporter = models.ForeignKey('store.Transporter', related_name='transporter', blank=True, default=1)
+    clear = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-created',)
 
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
-        #Send sms via url.
+        # Send sms via url.
         sms_url = 'https://api.africastalking.com/restless/send?username=mapp&' \
-              'Apikey=0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2&' \
-              'to=&message=New M Shopping Order Alert.'
+                  'Apikey=0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2&' \
+                  'to=&message=New M Shopping Order Alert.'
         urllib.urlopen(sms_url)
 
     def __unicode__(self):

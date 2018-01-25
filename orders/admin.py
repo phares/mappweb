@@ -5,7 +5,7 @@ from .models import Order, OrderItem
 
 
 class OrderModelAdmin(admin.ModelAdmin):
-    list_display = ["created", "owner", "address", "fee", "status", "quantity", "store", "transporter"]
+    list_display = ["created", "owner", "address", "fee", "status", "quantity", "store", "transporter", "clear"]
     list_filter = ["store", "transporter"]
     list_editable = ["status"]
     search_fields = ["owner"]
