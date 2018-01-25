@@ -17,12 +17,12 @@ class OrdersList(generics.ListCreateAPIView):
     serializer_class = OrderSerializer
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return Order.objects.all()
-        elif self.request.user.is_staff:
-            return Order.objects.all()
-        else:
-            return Order.objects.filter(owner=self.request.user, clear=False)
+        # if self.request.user.is_superuser:
+        #     return Order.objects.all()
+        # elif self.request.user.is_staff:
+        #     return Order.objects.all()
+        # else:
+        return Order.objects.filter(owner=self.request.user, clear=False)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
