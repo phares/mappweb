@@ -42,6 +42,7 @@ class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class OrdersUpdateView(generics.UpdateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
