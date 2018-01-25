@@ -22,7 +22,7 @@ class OrdersList(generics.ListCreateAPIView):
         elif self.request.user.is_staff:
             return Order.objects.all()
         else:
-            return Order.objects.filter(owner=self.request.user)
+            return Order.objects.filter(owner=self.request.user, clear=False)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

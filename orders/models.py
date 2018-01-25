@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 import urllib
 
-status = (('ACTIVE', 'ACTIVE'), ('CANCELLED', 'CANCELLED'), ('COMPLETED', 'COMPLETED'),
+status = (('CANCELLED', 'CANCELLED'), ('COMPLETED', 'COMPLETED'),
           ('PROCESSING', 'PROCESSING'), ('FAILED', 'FAILED'), ('RECEIVED', 'RECEIVED'))
 
 
