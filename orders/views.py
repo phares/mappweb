@@ -42,7 +42,7 @@ class OrdersDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class OrdersUpdateView(generics.UpdateAPIView):
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
@@ -78,6 +78,8 @@ class OrdersStoreDetail(generics.RetrieveUpdateDestroyAPIView):
             return Order.objects.all()
         else:
             return Order.objects.filter(store__user=self.request.user)
+
+
 # End all orders store
 
 
@@ -109,6 +111,8 @@ class OrdersStoreReceivedDetail(generics.RetrieveUpdateDestroyAPIView):
             return Order.objects.filter(status="RECEIVED")
         else:
             return Order.objects.filter(store__user=self.request.user, status="RECEIVED")
+
+
 # End all orders store New
 
 
@@ -140,6 +144,8 @@ class OrdersStoreProcessingDetail(generics.RetrieveUpdateDestroyAPIView):
             return Order.objects.filter(status="PROCESSING")
         else:
             return Order.objects.filter(store__user=self.request.user, status="PROCESSING")
+
+
 # End all orders store process
 
 
@@ -154,7 +160,7 @@ class OrdersStoreCompleteList(generics.ListCreateAPIView):
         elif self.request.user.is_staff:
             return Order.objects.filter(status="COMPLETED")
         else:
-            return Order.objects.filter(store__user=self.request.user,status="COMPLETED")
+            return Order.objects.filter(store__user=self.request.user, status="COMPLETED")
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -170,7 +176,12 @@ class OrdersStoreCompleteDetail(generics.RetrieveUpdateDestroyAPIView):
         elif self.request.user.is_staff:
             return Order.objects.filter(status="COMPLETED")
         else:
-            return Order.objects.filter(store__user=self.request.user, status="COMPLETED")
+            queryset = Order.objects.filter(store__user=self.request.user)
+            queryset = queryset.filter(tatus="COMPLETED") | queryset.filter(tatus="FAILED") \
+                       | queryset.filter(tatus="CANCELLED")
+            return queryset
+
+
 # End all orders store complete
 
 
@@ -188,4 +199,5 @@ class OrdersItemDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
 # End Order Item list
