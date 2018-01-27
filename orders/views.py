@@ -157,18 +157,18 @@ class OrdersStoreCompleteList(generics.ListCreateAPIView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             queryset = Order.objects.all()
-            queryset = queryset.filter(tatus="COMPLETED") | queryset.filter(tatus="FAILED") \
-                       | queryset.filter(tatus="CANCELLED")
+            queryset = queryset.filter(status="COMPLETED") | queryset.filter(status="FAILED") \
+                       | queryset.filter(status="CANCELLED")
             return queryset
         elif self.request.user.is_staff:
             queryset = Order.objects.all()
-            queryset = queryset.filter(tatus="COMPLETED") | queryset.filter(tatus="FAILED") \
-                       | queryset.filter(tatus="CANCELLED")
+            queryset = queryset.filter(status="COMPLETED") | queryset.filter(status="FAILED") \
+                       | queryset.filter(status="CANCELLED")
             return queryset
         else:
             queryset = Order.objects.filter(store__user=self.request.user)
-            queryset = queryset.filter(tatus="COMPLETED") | queryset.filter(tatus="FAILED") \
-                       | queryset.filter(tatus="CANCELLED")
+            queryset = queryset.filter(status="COMPLETED") | queryset.filter(status="FAILED") \
+                       | queryset.filter(status="CANCELLED")
             return queryset
 
     def perform_create(self, serializer):
@@ -182,18 +182,18 @@ class OrdersStoreCompleteDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             queryset = Order.objects.all()
-            queryset = queryset.filter(tatus="COMPLETED") | queryset.filter(tatus="FAILED") \
-                       | queryset.filter(tatus="CANCELLED")
+            queryset = queryset.filter(status="COMPLETED") | queryset.filter(status="FAILED") \
+                       | queryset.filter(status="CANCELLED")
             return queryset
         elif self.request.user.is_staff:
             queryset = Order.objects.all()
-            queryset = queryset.filter(tatus="COMPLETED") | queryset.filter(tatus="FAILED") \
-                       | queryset.filter(tatus="CANCELLED")
+            queryset = queryset.filter(status="COMPLETED") | queryset.filter(status="FAILED") \
+                       | queryset.filter(status="CANCELLED")
             return queryset
         else:
             queryset = Order.objects.filter(store__user=self.request.user)
-            queryset = queryset.filter(tatus="COMPLETED") | queryset.filter(tatus="FAILED") \
-                       | queryset.filter(tatus="CANCELLED")
+            queryset = queryset.filter(status="COMPLETED") | queryset.filter(status="FAILED") \
+                       | queryset.filter(status="CANCELLED")
             return queryset
 
 
