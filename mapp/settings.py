@@ -4,7 +4,7 @@ from decouple import config
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = ['127.0.0.1','m-shopping.herokuapp.com', 'mshoppingke.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'm-shopping.herokuapp.com', 'mshoppingke.herokuapp.com']
 
 
 INSTALLED_APPS = (
@@ -100,7 +100,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
-AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')  # os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
 AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')  # os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')  # os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
 AWS_S3_HOST = config('AWS_S3_HOST')  # os.environ.get("AWS_S3_HOST", "")
+AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')  # os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
