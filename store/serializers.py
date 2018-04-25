@@ -13,7 +13,6 @@ class TransporterSerializer(serializers.ModelSerializer):
 
 class StoreSerializer(serializers.ModelSerializer):
     transporters = TransporterSerializer(many=True, read_only=True)
-    user = UserSerializer(many=False, read_only=True)
 
     class Meta:
         model = Store
