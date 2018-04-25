@@ -93,14 +93,14 @@ DEFAULT_FILE_STORAGE = "mapp.s3utils.MediaS3BotoStorage"
 if hasattr(ssl, '_create_unverified_context'):
    ssl._create_default_https_context = ssl._create_unverified_context
 
-dblink = config('DATABASE_URL')  # os.environ.get("DATABASE_URL", "")
-DATABASES = {'default': dj_database_url.config(default=dblink)}
+db_link = config('DATABASE_URL', os.environ.get("DATABASE_URL", ""))  # os.environ.get("DATABASE_URL", "")
+DATABASES = {'default': dj_database_url.config(default=db_link)}
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', os.environ.get("DEBUG", ""), cast=bool)
 
 AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
-AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')  # os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')  # os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
-AWS_S3_HOST = config('AWS_S3_HOST')  # os.environ.get("AWS_S3_HOST", "")
-AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')  # os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
+AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY', os.environ.get("AWS_S3_SECRET_ACCESS_KEY", ""))  # os.environ.get("AWS_S3_SECRET_ACCESS_KEY", "")
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', os.environ.get("AWS_STORAGE_BUCKET_NAME", ""))  # os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+AWS_S3_HOST = config('AWS_S3_HOST', os.environ.get("AWS_S3_HOST", ""))  # os.environ.get("AWS_S3_HOST", "")
+AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID', os.environ.get("AWS_S3_ACCESS_KEY_ID", ""))  # os.environ.get("AWS_S3_ACCESS_KEY_ID", "")
