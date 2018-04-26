@@ -4,6 +4,7 @@ from customers.serializers import UserSerializer
 
 
 class TransporterSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False, read_only=True)
 
     class Meta:
         model = Transporter
@@ -12,6 +13,7 @@ class TransporterSerializer(serializers.ModelSerializer):
 
 class StoreSerializer(serializers.ModelSerializer):
     transporters = TransporterSerializer(many=True, read_only=True)
+    user = UserSerializer(many=False, read_only=False)
 
     class Meta:
         model = Store
