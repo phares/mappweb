@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from __future__ import unicode_literals
+
+import urllib
+
 from orders.serializers import OrderSerializer, OrderItemSerializer
 from orders.models import Order, OrderItem
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, viewsets
 from django.shortcuts import render
 from mapp.permissions import IsOwnerOrReadOnly
-from orders.serializers import OrderStoreSerializer
+from orders.serializers import OrderStoreSerializer, OrderTasksSerializer
 
 
 # All Orders
+from rest_framework.response import Response
 
 
 class OrdersList(generics.ListCreateAPIView):
@@ -216,3 +220,30 @@ class OrdersItemDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrderItemSerializer
 
 # End Order Item list
+
+
+class OrderTasks(viewsets.ViewSet):
+    serializer_class = OrderTasksSerializer
+    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        res = None
+        return Response(res)
+
+    def order(self, request, *args, **kwargs):
+        order_id = None
+
+        try:
+            order_id = request.data.get('order_id')
+
+            # Send sms via url.
+            sms_url = 'https://api.africastalking.com/restless/send?username=mapp&' \
+                      'Apikey=0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2&' \
+                      'to=+254790331936&message=Order Id.'
+            urllib.urlopen(sms_url)
+
+        except Exception as e:
+            pass
+
+        return Response(order_id)

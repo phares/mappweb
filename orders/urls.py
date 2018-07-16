@@ -17,6 +17,7 @@ urlpatterns = ([
     url(r'^orders_store_complete/(?P<pk>[0-9]+)/$', views.OrdersStoreCompleteDetail.as_view(), ),
     url(r'^order_items/$', views.OrdersItemList.as_view(), name='orderitems-list'),
     url(r'^order_items/(?P<pk>[0-9]+)/$', views.OrdersItemDetail.as_view()),
+    url(r'^order_tasks/$', views.OrderTasks.as_view({"post": "order"}), name='order-tasks'),
 
 ])
 

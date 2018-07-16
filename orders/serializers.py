@@ -127,3 +127,14 @@ class OrderStoreCompleteSerializer(serializers.ModelSerializer):
         fields = ('id', 'created', 'quantity', 'address', 'address_id', 'owner', 'owner_first_name',
                   'owner_last_name', 'fee', 'status', 'store', 'transporter', 'items', 'store_id',
                   'transporter_id')
+
+
+class OrderTasksSerializer(serializers.Serializer):
+
+    order_id = serializers.CharField(read_only=False, max_length=30, required=False)
+
+    def update(self, instance, validated_data):
+        pass
+
+    def create(self, validated_data):
+        pass
