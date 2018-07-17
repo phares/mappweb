@@ -25,10 +25,10 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
         # Send sms via url.
-        sms_url = 'https://api.africastalking.com/restless/send?username=mapp&' \
-                  'Apikey=0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2&' \
-                  'to=+254790331936&message=New M Shopping Order Alert.'
-        urllib.urlopen(sms_url)
+        # sms_url = 'https://api.africastalking.com/restless/send?username=mapp&' \
+        #           'Apikey=0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2&' \
+        #           'to=+254790331936&message=New M Shopping Order Alert.'
+        # urllib.urlopen(sms_url)
 
     def __unicode__(self):
         return str(self.id)

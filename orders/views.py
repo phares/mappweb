@@ -3,13 +3,15 @@ from __future__ import unicode_literals
 from __future__ import unicode_literals
 
 import urllib
-
+# Import the helper gateway class
+from AfricasTalkingGateway import AfricasTalkingGateway, AfricasTalkingGatewayException
 from orders.serializers import OrderSerializer, OrderItemSerializer
 from orders.models import Order, OrderItem
 from rest_framework import generics, permissions, viewsets
 from django.shortcuts import render
 from mapp.permissions import IsOwnerOrReadOnly
 from orders.serializers import OrderStoreSerializer, OrderTasksSerializer
+from django.shortcuts import get_object_or_404
 
 
 # All Orders
@@ -236,14 +238,43 @@ class OrderTasks(viewsets.ViewSet):
 
         try:
             order_id = request.data.get('order_id')
+            order = get_object_or_404(Order, pk=order_id)
 
-            # Send sms via url.
-            sms_url = 'https://api.africastalking.com/restless/send?username=mapp&' \
-                      'Apikey=0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2&' \
-                      'to=+254790331936&message=Order Id.'
-            urllib.urlopen(sms_url)
+            if order:
+                message = ''
+
+                items = OrderItem.objects.filter(order=order)
+                for i in items:
+                    message += i.product.name + ' ' + str(i.quantity) + ' ' +  str(i.price) + ' , '
+
+                customer_name = order.owner.first_name
+                customer_no = order.owner.username
+                order_address = order.address.name + ' - ' + order.address.place_address
+
+                if customer_no:
+                    send_sms(customer_no, message)
+
+                if order.store.active and order.store.user.is_active:
+                    message += customer_no + ' ' + customer_name + ' (' + order_address + ' )'
+                    to = order.store.user.username
+                    send_sms(to, message)
+
+                if order.transporter.active and order.transporter.user.is_active:
+                    message += customer_no + ' ' + customer_name + ' (' + order_address + ' )'
+                    to = order.transporter.user.username
+                    send_sms(to, message)
 
         except Exception as e:
             pass
 
         return Response(order_id)
+
+
+def send_sms(to, message):
+    try:
+        username = "mapp"
+        apikey = "0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2"
+        gateway = AfricasTalkingGateway(username, apikey)
+        results = gateway.sendMessage(to, message)
+    except AfricasTalkingGatewayException, e:
+        print 'Encountered an error while sending: %s' % str(e)
