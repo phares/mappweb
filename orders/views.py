@@ -242,27 +242,45 @@ class OrderTasks(viewsets.ViewSet):
 
             if order:
                 message = ''
-
+                cost = order.fee  # delivery fee
                 items = OrderItem.objects.filter(order=order)
                 for i in items:
-                    message += i.product.name + ' ' + str(i.quantity) + ' ' +  str(i.price) + ' , '
+                    cost += i.price * i.quantity
+                    message += i.product.name + ' ' + str(i.quantity) + ' ' + str(i.price) + ', '
+
+                message += 'Delivery ' + str(order.fee) + ' '
 
                 customer_name = order.owner.first_name
                 customer_no = order.owner.username
                 order_address = order.address.name + ' - ' + order.address.place_address
 
                 if customer_no:
-                    send_sms(customer_no, message)
+                    try:
+                        transporter_no = order.transporter.user.username
+                        transporter_name = order.transporter.user.first_name
+                        customer_message = message + transporter_name + ' ' + transporter_no + \
+                                           ' (' + order_address + ')' + ' ' + str(cost) + '/= '
+                        send_sms(customer_no, customer_message)
+                    except:
+                        pass
 
                 if order.store.active and order.store.user.is_active:
-                    message += customer_no + ' ' + customer_name + ' (' + order_address + ' )'
-                    to = order.store.user.username
-                    send_sms(to, message)
+                    try:
+                        store_message = message + customer_name + ' ' + customer_no + \
+                                        ' (' + order_address + ')' + ' ' + str(cost) + '/= '
+                        store_no = order.store.user.username
+                        send_sms(store_no, store_message)
+                    except:
+                        pass
 
                 if order.transporter.active and order.transporter.user.is_active:
-                    message += customer_no + ' ' + customer_name + ' (' + order_address + ' )'
-                    to = order.transporter.user.username
-                    send_sms(to, message)
+                    try:
+                        transporter_message = message + customer_name + ' ' + customer_no + \
+                                              ' (' + order_address + ')' + ' ' + str(cost) + '/= '
+                        transporter_no = order.transporter.user.username
+                        send_sms(transporter_no, transporter_message)
+                    except:
+                        pass
 
         except Exception as e:
             pass
