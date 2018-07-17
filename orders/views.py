@@ -13,7 +13,6 @@ from mapp.permissions import IsOwnerOrReadOnly
 from orders.serializers import OrderStoreSerializer, OrderTasksSerializer
 from django.shortcuts import get_object_or_404
 
-
 # All Orders
 from rest_framework.response import Response
 
@@ -221,6 +220,7 @@ class OrdersItemDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
 
+
 # End Order Item list
 
 
@@ -282,8 +282,11 @@ class OrderTasks(viewsets.ViewSet):
                     except:
                         pass
 
+            else:
+                print 'No order found'
+
         except Exception as e:
-            pass
+            print e
 
         return Response(order_id)
 
@@ -292,6 +295,8 @@ def send_sms(to, message):
     try:
         username = "mapp"
         apikey = "0be69f64247f7185d4400e15dd631f8035586b0972e58f14c48241e2a47e0ee2"
+        print to
+        print message
         gateway = AfricasTalkingGateway(username, apikey)
         results = gateway.sendMessage(to, message)
     except AfricasTalkingGatewayException, e:
